@@ -1,27 +1,49 @@
 import React, { useState } from 'react';
 import { Plus, Search, Edit2, Trash2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import type { Branch } from '../../types';
+//import type { Branch } from '../../types';
 import Pagination from '../../components/common/Pagination';
 import { usePagination } from '../../hooks/usePagination';
-import api from '../../utils/api';
-import axios from 'axios';
+import type { Branch } from '../../types';
+//import api from '../../utils/api';
+// import axios from 'axios';
 
 const BranchList = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
-  const [branches, setBranches] = useState<Branch[]>([]);
+  //const [branches, setBranches] = useState<Branch[]>([]);
 
-  const fetchBranches = async () => {
-    try {
-      const response = await api.get('/branches');
-      setBranches(response.data);
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status !== 500) {
-        console.error('Error fetching branches:', error.message);
-      }
-    }
-  };
+  const branches: Branch[] = [
+    {
+      id: '1',
+      name: 'HQ Jakarta',
+      code: 'HQ-JKT',
+      address: 'Jl. Sudirman No. 123',
+      city: 'Jakarta',
+      country: 'Indonesia',
+      phone: '+62 21 1234567',
+      email: 'hq.jakarta@company.com',
+      managerId: '1',
+      managerName: 'John Doe',
+      employeeCount: 150,
+      assetCount: 450,
+      status: 'active',
+      createdAt: '2024-01-01',
+      updatedAt: '2024-03-15'
+    },
+    // Add more mock data as needed
+  ];
+
+  // const fetchBranches = async () => {
+  //   try {
+  //     const response = await api.get('/branches');
+  //     setBranches(response.data);
+  //   } catch (error) {
+  //     if (axios.isAxiosError(error) && error.response?.status !== 500) {
+  //       console.error('Error fetching branches:', error.message);
+  //     }
+  //   }
+  // };
 
   const filteredBranches = branches.filter(branch =>
     branch.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
