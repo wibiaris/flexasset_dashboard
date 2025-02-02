@@ -18,6 +18,8 @@ import BranchDetail from './pages/management/BranchDetail';
 import DepartmentList from './pages/management/DepartmentList';
 import DepartmentForm from './pages/management/DepartmentForm';
 import DepartmentDetail from './pages/management/DepartmentDetail';
+import NotFound from './pages/NotFound'
+import ServerError from './pages/ServerError'
   {/* import BranchForm from './pages/management/BranchForm';
 import DepartmentList from './pages/management/DepartmentList';
 import DepartmentForm from './pages/management/DepartmentForm';
@@ -75,6 +77,8 @@ function App() {
                 <Route path=":id" element={<DepartmentDetail />} />
               </Route>
             </Route>
+            <Route path="500" element={<ServerError />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </Router>
