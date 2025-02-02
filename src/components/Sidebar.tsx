@@ -13,6 +13,7 @@ import {
   ShieldCheck
 } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
+import logo from '../assets/images/logo.png';
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,8 +49,17 @@ const Sidebar = () => {
         lg:translate-x-0
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
+        <div className="p-4 border-b">
+          <div className="flex items-center gap-3">
+            <img 
+              src={logo} 
+              alt="FlexAsset Logo" 
+              className="w-8 h-8 object-contain"
+            />
+            <h1 className="text-xl font-bold text-gray-800">FlexAsset</h1>
+          </div>
+        </div>
         <div className="p-6">
-          <h1 className="text-xl font-bold text-gray-800 mb-8">FlexAsset</h1>
           <nav>
             <div className="mb-4">
               <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Main Menu</p>
