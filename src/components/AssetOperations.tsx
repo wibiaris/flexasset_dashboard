@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { PenTool as Tool, AlertTriangle, CheckCircle, Calendar, Plus } from 'lucide-react';
 import type { Asset } from '../types';
-import AssetOperationsForm from './forms/AssetOperationsForm';
 import Pagination from './common/Pagination';
 import { usePagination } from '../hooks/usePagination';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const AssetOperations = () => {
-  const [isFormOpen, setIsFormOpen] = useState(false);
+  const navigate = useNavigate();
 
   // Sample data - in a real app, this would come from your backend
   const maintenanceAssets: Asset[] = [
@@ -59,17 +58,12 @@ const AssetOperations = () => {
     itemsPerPage: 10,
   });
 
-  const handleAssetSubmit = (data: Partial<Asset>) => {
-    console.log('New asset added:', data);
-    // Here you would typically send this to your backend
-  };
-
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">Asset Operations</h2>
         <button 
-          onClick={() => setIsFormOpen(true)}
+          onClick={() => navigate('/asset-operations/create')}
           className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center gap-2"
         >
           <Plus size={20} />
@@ -167,12 +161,6 @@ const AssetOperations = () => {
           />
         </div>
       </div>
-
-      <AssetOperationsForm
-        isOpen={isFormOpen}
-        onClose={() => setIsFormOpen(false)}
-        onSubmit={handleAssetSubmit}
-      />
     </div>
   );
 };

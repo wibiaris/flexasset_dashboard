@@ -2,8 +2,14 @@ export interface User {
   id: string;
   email: string;
   name: string;
-  role: 'admin' | 'manager' | 'user';
-  department: string;
+  role: UserRole;
+  department: Department;
+  branch: Branch;
+  position: string;
+  status: 'active' | 'inactive';
+  lastLogin?: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Asset {
@@ -86,4 +92,51 @@ export interface AssetRequest {
     comment?: string;
     date?: string;
   }[];
+}
+
+export interface Department {
+  id: string;
+  name: string;
+  description: string;
+  managerId: string;
+  managerName: string;
+  employeeCount: number;
+  assets: Asset[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Branch {
+  id: string;
+  name: string;
+  code: string;
+  address: string;
+  city: string;
+  country: string;
+  phone: string;
+  email: string;
+  managerId: string;
+  managerName: string;
+  employeeCount: number;
+  assetCount: number;
+  status: 'active' | 'inactive';
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface UserRole {
+  id: string;
+  name: string;
+  description: string;
+  permissions: Permission[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Permission {
+  id: string;
+  name: string;
+  description: string;
+  module: string;
+  actions: ('create' | 'read' | 'update' | 'delete')[];
 }

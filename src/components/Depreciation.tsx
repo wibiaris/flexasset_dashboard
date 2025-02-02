@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { TrendingDown, AlertTriangle, Ban, ArrowDownToLine, Plus, Calendar } from 'lucide-react';
 import type { Asset } from '../types';
-import DepreciationForm from './forms/DepreciationForm';
 import Pagination from './common/Pagination';
 import { usePagination } from '../hooks/usePagination';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Depreciation = () => {
+  const navigate = useNavigate();
   const [filterStatus, setFilterStatus] = useState<'all' | 'critical' | 'warning' | 'healthy'>('all');
-  const [isFormOpen, setIsFormOpen] = useState(false);
   
   // Sample data - in a real app, this would come from your backend
   const assets: Asset[] = [
@@ -95,18 +94,13 @@ const Depreciation = () => {
     healthy: assets.filter(a => calculateDepreciationStatus(a) === 'healthy').length
   };
 
-  const handleDepreciationSubmit = (data: Partial<Asset>) => {
-    console.log('Depreciation updated:', data);
-    // Here you would typically send this to your backend
-  };
-
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">Asset Depreciation Analysis</h2>
         <div className="flex gap-4">
           <button 
-            onClick={() => setIsFormOpen(true)}
+            onClick={() => navigate('/depreciation/update')}
             className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center gap-2"
           >
             <Plus size={20} />
@@ -266,12 +260,6 @@ const Depreciation = () => {
           />
         </div>
       </div>
-
-      <DepreciationForm
-        isOpen={isFormOpen}
-        onClose={() => setIsFormOpen(false)}
-        onSubmit={handleDepreciationSubmit}
-      />
     </div>
   );
 };

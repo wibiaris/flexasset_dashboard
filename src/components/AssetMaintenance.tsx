@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { ClipboardCheck, Search, FileText, AlertCircle, UserCheck, Plus } from 'lucide-react';
 import type { Asset, MaintenanceRecord } from '../types';
-import AssetMaintenanceForm from './forms/AssetMaintenanceForm';
 import Pagination from './common/Pagination';
 import { usePagination } from '../hooks/usePagination';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const AssetMaintenance = () => {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
-  const [isFormOpen, setIsFormOpen] = useState(false);
   
   // Sample data - in a real app, this would come from your backend
   const assets: Asset[] = [
@@ -64,18 +63,13 @@ const AssetMaintenance = () => {
     itemsPerPage: 10,
   });
 
-  const handleMaintenanceSubmit = (data: Partial<MaintenanceRecord>) => {
-    console.log('Maintenance scheduled:', data);
-    // Here you would typically send this to your backend
-  };
-
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">Asset Maintenance</h2>
         <div className="flex gap-4">
           <button 
-            onClick={() => setIsFormOpen(true)}
+            onClick={() => navigate('/asset-maintenance/create')}
             className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center gap-2"
           >
             <Plus size={20} />
@@ -194,12 +188,6 @@ const AssetMaintenance = () => {
           />
         </div>
       </div>
-      
-      <AssetMaintenanceForm
-        isOpen={isFormOpen}
-        onClose={() => setIsFormOpen(false)}
-        onSubmit={handleMaintenanceSubmit}
-      />
     </div>
   );
 };

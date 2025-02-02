@@ -1,9 +1,23 @@
 import React, { useState } from 'react';
-import { LayoutDashboard, Box, Key, Building2, Settings, Menu, X, CheckSquare } from 'lucide-react';
+import { 
+  LayoutDashboard, 
+  Box, 
+  Key, 
+  Building2, 
+  Settings, 
+  Menu, 
+  X, 
+  CheckSquare,
+  Users,
+  Briefcase,
+  ShieldCheck
+} from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const currentPath = window.location.pathname;
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -37,88 +51,123 @@ const Sidebar = () => {
         <div className="p-6">
           <h1 className="text-xl font-bold text-gray-800 mb-8">FlexAsset</h1>
           <nav>
-            <ul className="space-y-2">
-              <li>
-                <a 
-                  href="/dashboard" 
-                  onClick={() => setIsOpen(false)}
-                  className={`flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors ${currentPath === '/dashboard' ? 'bg-blue-50 text-blue-600' : ''}`}
-                >
-                  <LayoutDashboard size={20} />
-                  <span>Dashboard</span>
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="/asset-maintenance" 
-                  onClick={() => setIsOpen(false)}
-                  className={`flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors ${currentPath === '/asset-maintenance' ? 'bg-blue-50 text-blue-600' : ''}`}
-                >
-                  <Box size={20} />
-                  <span>Assets Maintenance</span>
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="/asset-operations" 
-                  onClick={() => setIsOpen(false)}
-                  className={`flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors ${currentPath === '/asset-operations' ? 'bg-blue-50 text-blue-600' : ''}`}
-                >
-                  <Box size={20} />
-                  <span>Assets Operations</span>
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="/depreciation" 
-                  onClick={() => setIsOpen(false)}
-                  className={`flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors ${currentPath === '/depreciation' ? 'bg-blue-50 text-blue-600' : ''}`}
-                >
-                  <Box size={20} />
-                  <span>Depreciation</span>
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="/approvals" 
-                  onClick={() => setIsOpen(false)}
-                  className={`flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors ${currentPath === '/approvals' ? 'bg-blue-50 text-blue-600' : ''}`}
-                >
-                  <CheckSquare size={20} />
-                  <span>Approvals</span>
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="/licenses" 
-                  onClick={() => setIsOpen(false)}
-                  className={`flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors ${currentPath === '/licenses' ? 'bg-blue-50 text-blue-600' : ''}`}
-                >
-                  <Key size={20} />
-                  <span>Licenses</span>
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="/branches" 
-                  onClick={() => setIsOpen(false)}
-                  className={`flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors ${currentPath === '/branches' ? 'bg-blue-50 text-blue-600' : ''}`}
-                >
-                  <Building2 size={20} />
-                  <span>Branches</span>
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="/settings" 
-                  onClick={() => setIsOpen(false)}
-                  className={`flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors ${currentPath === '/settings' ? 'bg-blue-50 text-blue-600' : ''}`}
-                >
-                  <Settings size={20} />
-                  <span>Settings</span>
-                </a>
-              </li>
-            </ul>
+            <div className="mb-4">
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Main Menu</p>
+              <ul className="space-y-2">
+                <li>
+                  <a 
+                    href="/dashboard" 
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors ${currentPath === '/dashboard' ? 'bg-blue-50 text-blue-600' : ''}`}
+                  >
+                    <LayoutDashboard size={20} />
+                    <span>Dashboard</span>
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="/asset-maintenance" 
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors ${currentPath === '/asset-maintenance' ? 'bg-blue-50 text-blue-600' : ''}`}
+                  >
+                    <Box size={20} />
+                    <span>Assets Maintenance</span>
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="/asset-operations" 
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors ${currentPath === '/asset-operations' ? 'bg-blue-50 text-blue-600' : ''}`}
+                  >
+                    <Box size={20} />
+                    <span>Assets Operations</span>
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="/depreciation" 
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors ${currentPath === '/depreciation' ? 'bg-blue-50 text-blue-600' : ''}`}
+                  >
+                    <Box size={20} />
+                    <span>Depreciation</span>
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="/approvals" 
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors ${currentPath === '/approvals' ? 'bg-blue-50 text-blue-600' : ''}`}
+                  >
+                    <CheckSquare size={20} />
+                    <span>Approvals</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div className="mb-4">
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Management</p>
+              <ul className="space-y-2">
+                <li>
+                  <a 
+                    href="/management/branches" 
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors ${currentPath.includes('/management/branches') ? 'bg-blue-50 text-blue-600' : ''}`}
+                  >
+                    <Building2 size={20} />
+                    <span>Branches</span>
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="/management/departments" 
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors ${currentPath.includes('/management/departments') ? 'bg-blue-50 text-blue-600' : ''}`}
+                  >
+                    <Briefcase size={20} />
+                    <span>Departments</span>
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="/management/users" 
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors ${currentPath.includes('/management/users') ? 'bg-blue-50 text-blue-600' : ''}`}
+                  >
+                    <Users size={20} />
+                    <span>Users</span>
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="/management/roles" 
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors ${currentPath.includes('/management/roles') ? 'bg-blue-50 text-blue-600' : ''}`}
+                  >
+                    <ShieldCheck size={20} />
+                    <span>Roles & Permissions</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">System</p>
+              <ul className="space-y-2">
+                <li>
+                  <a 
+                    href="/settings" 
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center space-x-3 p-3 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors ${currentPath === '/settings' ? 'bg-blue-50 text-blue-600' : ''}`}
+                  >
+                    <Settings size={20} />
+                    <span>Settings</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </nav>
         </div>
       </div>
