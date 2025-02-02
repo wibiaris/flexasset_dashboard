@@ -1,56 +1,48 @@
-import React, { useState } from 'react';
-import { Plus, Search, Edit2, Trash2 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import type { Branch } from '../../types';
-import Pagination from '../../components/common/Pagination';
-import { usePagination } from '../../hooks/usePagination';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Plus, Search, Edit2, Trash2 } from 'lucide-react'
+import { Department } from '../../types'
+import Pagination from '../../components/common/Pagination'
+import { usePagination } from '../../hooks/usePagination'
 
-const BranchList = () => {
-  const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState('');
+const DepartmentList = () => {
+  const navigate = useNavigate()
+  const [searchTerm, setSearchTerm] = useState('')
 
-  // Mock data - replace with actual API call
-  const branches: Branch[] = [
+  // Mock data
+  const departments: Department[] = [
     {
       id: '1',
-      name: 'HQ Jakarta',
-      code: 'HQ-JKT',
-      address: 'Jl. Sudirman No. 123',
-      city: 'Jakarta',
-      country: 'Indonesia',
-      phone: '+62 21 1234567',
-      email: 'hq.jakarta@company.com',
-      managerId: '1',
-      managerName: 'John Doe',
-      employeeCount: 150,
-      assetCount: 450,
-      status: 'active',
-      createdAt: '2024-01-01',
-      updatedAt: '2024-03-15'
-    },
-    // Add more mock data as needed
-  ];
+      name: 'IT Department',
+      code: 'DEPT-IT',
+      description: 'Information Technology Division',
+      branchId: '1',
+      branchName: 'HQ Jakarta',
+      employeeCount: 25,
+      createdAt: '2024-01-01'
+    }
+  ]
 
-  const filteredBranches = branches.filter(branch =>
-    branch.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    branch.code.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredDepartments = departments.filter(dept =>
+    dept.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    dept.code.toLowerCase().includes(searchTerm.toLowerCase())
+  )
 
   const { currentPage, totalPages, paginatedData, handlePageChange } = usePagination({
-    data: filteredBranches,
+    data: filteredDepartments,
     itemsPerPage: 10
-  });
+  })
 
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Manajemen Cabang</h1>
+        <h1 className="text-2xl font-bold">Manajemen Departemen</h1>
         <button
-          onClick={() => navigate('/management/branches/create')}
+          onClick={() => navigate('/management/departments/create')}
           className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600 transition-colors"
         >
           <Plus size={20} />
-          Tambah Cabang
+          Tambah Departemen
         </button>
       </div>
 
@@ -59,7 +51,7 @@ const BranchList = () => {
           <div className="relative">
             <input
               type="text"
-              placeholder="Cari cabang..."
+              placeholder="Cari departemen..."
               className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -74,37 +66,29 @@ const BranchList = () => {
               <thead className="bg-gray-50">
                 <tr>
                   <th className="text-left py-3 px-4">Kode</th>
-                  <th className="text-left py-3 px-4">Nama Cabang</th>
-                  <th className="text-left py-3 px-4">Lokasi</th>
-                  <th className="text-left py-3 px-4">Telepon</th>
-                  <th className="text-left py-3 px-4">Status</th>
+                  <th className="text-left py-3 px-4">Nama Departemen</th>
+                  <th className="text-left py-3 px-4">Cabang</th>
+                  <th className="text-left py-3 px-4">Jumlah Karyawan</th>
                   <th className="text-left py-3 px-4">Aksi</th>
                 </tr>
               </thead>
               <tbody>
-                {paginatedData.map((branch) => (
+                {paginatedData.map((dept) => (
                   <tr 
-                    key={branch.id} 
+                    key={dept.id} 
                     className="border-t hover:bg-gray-50 cursor-pointer"
-                    onClick={() => navigate(`/management/branches/${branch.id}`)}
+                    onClick={() => navigate(`/management/departments/${dept.id}`)}
                   >
-                    <td className="py-3 px-4 font-medium">{branch.code}</td>
-                    <td className="py-3 px-4">{branch.name}</td>
-                    <td className="py-3 px-4">{branch.city}, {branch.country}</td>
-                    <td className="py-3 px-4">{branch.phone}</td>
-                    <td className="py-3 px-4">
-                      <span className={`px-2 py-1 rounded-full text-sm ${
-                        branch.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                      }`}>
-                        {branch.status}
-                      </span>
-                    </td>
+                    <td className="py-3 px-4 font-medium">{dept.code}</td>
+                    <td className="py-3 px-4">{dept.name}</td>
+                    <td className="py-3 px-4">{dept.branchName}</td>
+                    <td className="py-3 px-4">{dept.employeeCount}</td>
                     <td className="py-3 px-4">
                       <div className="flex gap-2">
                         <button
                           onClick={(e) => {
                             e.stopPropagation()
-                            navigate(`/management/branches/edit/${branch.id}`)
+                            navigate(`/management/departments/edit/${dept.id}`)
                           }}
                           className="text-blue-500 hover:text-blue-600 p-1 rounded-md hover:bg-blue-50 transition-colors"
                         >
@@ -113,7 +97,7 @@ const BranchList = () => {
                         <button
                           onClick={(e) => {
                             e.stopPropagation()
-                            console.log('Delete branch:', branch.id)
+                            console.log('Delete department:', dept.id)
                           }}
                           className="text-red-500 hover:text-red-600 p-1 rounded-md hover:bg-red-50 transition-colors"
                         >
@@ -136,7 +120,7 @@ const BranchList = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default BranchList;
+export default DepartmentList 

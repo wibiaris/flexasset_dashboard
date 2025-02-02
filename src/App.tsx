@@ -13,6 +13,11 @@ import CreateMaintenanceRequest from './pages/CreateMaintenanceRequest';
 import CreateAsset from './pages/CreateAsset';
 import UpdateDepreciation from './pages/UpdateDepreciation';
 import BranchList from './pages/management/BranchList';
+import BranchForm from './pages/management/BranchForm';
+import BranchDetail from './pages/management/BranchDetail';
+import DepartmentList from './pages/management/DepartmentList';
+import DepartmentForm from './pages/management/DepartmentForm';
+import DepartmentDetail from './pages/management/DepartmentDetail';
   {/* import BranchForm from './pages/management/BranchForm';
 import DepartmentList from './pages/management/DepartmentList';
 import DepartmentForm from './pages/management/DepartmentForm';
@@ -58,24 +63,18 @@ function App() {
             <Route path="asset/:id" element={<AssetDetails />} />
             <Route path="approvals" element={<ApprovalRequests />} />
             
-            {/* Management Routes
             <Route path="management">
               <Route path="branches" element={<BranchList />} />
               <Route path="branches/create" element={<BranchForm />} />
               <Route path="branches/edit/:id" element={<BranchForm />} />
-              
-              <Route path="departments" element={<DepartmentList />} />
-              <Route path="departments/create" element={<DepartmentForm />} />
-              <Route path="departments/edit/:id" element={<DepartmentForm />} />
-              
-              <Route path="users" element={<UserList />} />
-              <Route path="users/create" element={<UserForm />} />
-              <Route path="users/edit/:id" element={<UserForm />} />
-              
-              <Route path="roles" element={<RoleList />} />
-              <Route path="roles/create" element={<RoleForm />} />
-              <Route path="roles/edit/:id" element={<RoleForm />} />
-            </Route> */}
+              <Route path="branches/:id" element={<BranchDetail />} />
+              <Route path="departments">
+                <Route index element={<DepartmentList />} />
+                <Route path="create" element={<DepartmentForm />} />
+                <Route path="edit/:id" element={<DepartmentForm />} />
+                <Route path=":id" element={<DepartmentDetail />} />
+              </Route>
+            </Route>
           </Route>
         </Routes>
       </Router>
